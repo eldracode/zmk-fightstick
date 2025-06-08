@@ -3,13 +3,12 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    // Define a custom SOCD behavior. NU = Neutral.
-    // This means L+R = Neutral, and U+D = Neutral.
+    // 1. CORRECTED BEHAVIOR DEFINITION
+    //    The invalid 'bindings' property has been removed.
     behaviors {
         socd_nu: socd_nu {
             compatible = "zmk,behavior-socd";
             #binding-cells = <1>;
-            bindings = <&kp>, <&kp>;
             mode = "nu"; // Neutral mode
         };
     };
@@ -18,14 +17,14 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            // This order MUST match the order of pins in your fightstick.overlay file.
-            // The correct syntax is &behavior <parameter>. Here, the parameter is a key press.
+            // 2. CORRECTED BINDING SYNTAX
+            //    This is the simple, correct way to use the behavior.
             bindings = <
                 // Joystick (Up, Down, Left, Right)
-                &socd_nu <&kp W>      // Correct: Apply SOCD logic to the key press 'W'
-                &socd_nu <&kp S>      // Correct: Apply SOCD logic to the key press 'S'
-                &socd_nu <&kp A>      // Correct: Apply SOCD logic to the key press 'A'
-                &socd_nu <&kp D>      // Correct: Apply SOCD logic to the key press 'D'
+                &socd_nu W      // Use SOCD for the 'W' key
+                &socd_nu S      // Use SOCD for the 'S' key
+                &socd_nu A      // Use SOCD for the 'A' key
+                &socd_nu D      // Use SOCD for the 'D' key
                 
                 // 6 Action Buttons (B1-B6)
                 &kp U &kp I &kp O
