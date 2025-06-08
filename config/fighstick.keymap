@@ -14,16 +14,18 @@
         };
     };
 
-    // The keymap_transform block has been REMOVED.
-
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            // This order MUST match the order of pins in your fightstick.overlay file
+            // This order MUST match the order of pins in your fightstick.overlay file.
+            // The &socd_nu behavior is now applied to each directional key individually.
             bindings = <
                 // Joystick (Up, Down, Left, Right)
-                &socd_nu W A S D
+                &socd_nu W      // 1st pin in overlay (Up) sends 'W' through the SOCD filter
+                &socd_nu S      // 2nd pin in overlay (Down) sends 'S' through the SOCD filter
+                &socd_nu A      // 3rd pin in overlay (Left) sends 'A' through the SOCD filter
+                &socd_nu D      // 4th pin in overlay (Right) sends 'D' through the SOCD filter
                 
                 // 6 Action Buttons (B1-B6)
                 &kp U &kp I &kp O
