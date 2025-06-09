@@ -3,12 +3,14 @@
 #include <dt-bindings/zmk/bt.h>
 
 / {
-    // 1. CORRECTED BEHAVIOR DEFINITION
-    //    The invalid 'bindings' property has been removed.
     behaviors {
+        // THIS IS THE CORRECT DEFINITION
         socd_nu: socd_nu {
             compatible = "zmk,behavior-socd";
             #binding-cells = <1>;
+            // This next line is the critical fix.
+            // It tells the SOCD behavior that its parameter will be a key-press (&kp).
+            bindings = <&kp>;
             mode = "nu"; // Neutral mode
         };
     };
@@ -17,8 +19,7 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            // 2. CORRECTED BINDING SYNTAX
-            //    This is the simple, correct way to use the behavior.
+            // With the behavior correctly defined, this simple syntax now works.
             bindings = <
                 // Joystick (Up, Down, Left, Right)
                 &socd_nu W      // Use SOCD for the 'W' key
